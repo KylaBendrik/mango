@@ -1,0 +1,14 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Mango" %></h1>
+  <p>Peace of mind from farm to table!</p>
+</section>
+
+<section class="row">
+  <article class="column">
+    <h2>Who are we?</h2>
+    Mango is a little mom-and-pop shop specializing in the freshest produce in all of Nowheresville, Kentucky!
+  </article>
+  <article class="column">
+  Seasonal Products
+  </article>
+</section>
