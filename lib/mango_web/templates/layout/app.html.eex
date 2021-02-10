@@ -9,18 +9,18 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header class="container">
+    <header class="header">
         <nav role="navigation">
           <ul>
             <li>Fruits</li>
             <li>Veggies</li>
           </ul>
         </nav>
-        <a href="/" class="phx-logo">
+        <a href="/" class="mango-logo">
           <span>Mango</span><img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Mango Logo"/>
         </a>
     </header>
-    <main role="main" class="container">
+    <main role="main" class="main_container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
