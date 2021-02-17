@@ -1,0 +1,9 @@
+<h1 class="page-title"><%= @name %></h1>
+<div class="catalog">
+  <%= for product <- @products do %>
+    <article class="product">
+      <span class="product-name"><%= product.name %></span>
+      <span class="price"> INR <span class="product-price"><%= product.price %> </span>
+    </article>
+  <% end %>
+</div>
