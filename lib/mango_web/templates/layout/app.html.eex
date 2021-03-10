@@ -12,8 +12,6 @@
     <header class="header">
         <nav role="navigation">
           <ul>
-            <li>Fruits</li>
-            <li>Veggies</li>
           </ul>
         </nav>
         <a href="/" class="mango-logo">

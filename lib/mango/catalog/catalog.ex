@@ -8,11 +8,12 @@ defmodule Mango.Catalog do
       is_seasonal: false,
       category: "vegetables"
     }
-    product2 = %Product{name: "Apple", 
-    price: 100, 
-    is_seasonal: true,
-    category: "fruits"
-  }
+    product2 = %Product{
+      name: "Apple", 
+      price: 100, 
+      is_seasonal: true,
+      category: "fruits"
+    }
     
     [product1, product2]
   end

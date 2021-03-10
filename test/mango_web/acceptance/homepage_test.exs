@@ -12,6 +12,7 @@ defmodule MangoWeb.HomepageTest do
     
     ## WHEN ##
     # I navigate to home
+    navigate_to("/")
     
     ## THEN ##
     # I expect the page title to be "Seasonal Products"
