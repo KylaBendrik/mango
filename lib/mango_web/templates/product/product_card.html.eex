@@ -1,5 +1,5 @@
 <article class="product-card">
   <img class="product-img" src="<%= @product.image %>" />
-  <span class="product-name"><%= product.name %></span>
-  <span class="product-price"> ₹<span class="product-price-num"><%= product.price %> </span>
+  <span class="product-name"><%= @product.name %></span>
+  <span class="product-price"> ₹<span class="product-price-num"><%= @product.price %> </span>
 </article>
