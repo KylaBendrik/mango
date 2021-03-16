@@ -10,13 +10,13 @@
   </head>
   <body>
     <header class="header">
-        <nav role="navigation">
-          <ul>
-          </ul>
-        </nav>
         <a href="/" class="mango-logo">
-          <span>Mango</span><img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Mango Logo"/>
+          <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Mango Logo"/><span class="mango-logo">Mango</span>
         </a>
+        <ul class="nav">
+          <li class="nav-item"><%= link "Fruits", to: Routes.category_path(@conn, :show, "fruits") %></li>
+          <li class="nav-item"><%= link "Veggies", to: Routes.category_path(@conn, :show, "vegetables") %></li>
+        </ul>
     </header>
     <main role="main" class="main_container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
