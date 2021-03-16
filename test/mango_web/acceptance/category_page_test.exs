@@ -1,17 +1,20 @@
 defmodule Mangoeb.Acceptance.CategoryPageTest do
-  use ExUnit.Case
+  use Mango.DataCase
   use Hound.Helpers
-  
   hound_session()
-  
-  setup do
+    setup do
     ## GIVEN ##
-    # There are two products:
-    # Apple (fruit, price: 100)
-    # Tomato (vegetable (even though it is technically a fruit), price: 50)
+    # There are two products Apple and Tomato priced 100 and 50
+    # categorized under `fruits` and `vegetables` respectively
+    alias Mango.Repo
+    alias Mango.Catalog.Product
+    Repo.insert %Product{name: "Tomato", price: 50, is_seasonal:
+    false, category: "vegetables"}
+    Repo.insert %Product{name: "Apple", price: 100, is_seasonal:
+    true, category: "fruits"}
     :ok
   end
-  
+
   test "show fruits" do
     ## WHEN ##
     # I navigate to the fruits page
