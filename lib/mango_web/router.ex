@@ -38,6 +38,8 @@ defmodule MangoWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: MangoWeb.Telemetry
+      get "/register", RegistrationController, :new
+      post "/register", RegistrationController, :create
     end
   end
 end

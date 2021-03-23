@@ -18,5 +18,17 @@ defmodule Mango.CRM.Customer do
     |> validate_required([:name, :email, :phone, :residence_area,
     :password_hash])
     |> unique_constraint(:email)
+    |> put_hashed_password()
+  end
+
+  defp put_hashed_password(changeset) do
+    case changeset.valid? do
+      true ->
+        changes = changeset.changes
+        put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(changes.password))
+
+      _ ->
+        changeset
+    end
   end
 end
