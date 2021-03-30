@@ -21,6 +21,7 @@ defmodule MangoWeb.Router do
     get "/categories/:name", CategoryController, :show
     get "/login", SessionController, :new # used for displaying the login form
     post "/login", SessionController, :create # used for processing the login form
+    get "/logout", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.
