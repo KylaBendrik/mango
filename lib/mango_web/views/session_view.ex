@@ -1,3 +1,3 @@
 defmodule MangoWeb.SessionView do
-  use MangoWeb, :view 
+  use MangoWeb, :view
 end
