@@ -2,4 +2,9 @@
   <img class="product-img" src="<%= @product.image %>" />
   <span class="product-name"><%= @product.name %></span>
   <span class="product-price"> ₹<span class="product-price-num"><%= @product.price %> </span>
+  <%= form_for @conn, "/cart", [as: :cart], fn f-> %>
+    <%= hidden_input f, :product_id, value: @product.id%>
+    <%= number_input f, :quantity, value: 1%>
+    <%= submit "Add to Cart" %>
+  <% end %>
 </article>
