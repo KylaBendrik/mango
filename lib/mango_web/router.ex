@@ -18,6 +18,10 @@ defmodule MangoWeb.Router do
 
     get "/", PageController, :index
     get "/categories/:name", CategoryController, :show
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
   end
 
   # Other scopes may use custom stacks.
@@ -38,8 +42,6 @@ defmodule MangoWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: MangoWeb.Telemetry
-      get "/register", RegistrationController, :new
-      post "/register", RegistrationController, :create
     end
   end
 end

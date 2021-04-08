@@ -1,5 +1,6 @@
 defmodule Mango.Catalog.Product do
   use Ecto.Schema
+
   schema "products" do
     field :image, :string
     field :is_seasonal, :boolean, default: false
@@ -9,6 +10,6 @@ defmodule Mango.Catalog.Product do
     field :category, :string
     field :pack_size, :string
 
-  timestamps()
+    timestamps()
   end
 end

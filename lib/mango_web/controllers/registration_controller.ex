@@ -13,6 +13,7 @@ defmodule MangoWeb.RegistrationController do
         conn
         |> put_flash(:info, "Registration successful")
         |> redirect(to: Routes.page_path(conn, :index))
+
       {:error, changeset} ->
         conn
         |> render(:new, changeset: changeset)

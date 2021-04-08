@@ -9,12 +9,11 @@ defmodule Mango.Repo.Migrations.CreateProduct do
       add :is_seasonal, :boolean, default: false, null: false
       add :image, :string
       add :pack_size, :string
-      add :category, :string 
-      
+      add :category, :string
+
       timestamps()
     end
-    
+
     create unique_index(:products, [:sku])
   end
-  
 end

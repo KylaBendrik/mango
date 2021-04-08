@@ -3,10 +3,12 @@ defmodule MangoWeb.Acceptance.RegistrationTest do
   use Hound.Helpers
 
   hound_session()
+
   test "registers an account with valid data" do
     navigate_to("/register")
 
     form = find_element(:id, "registration-form")
+
     find_within_element(form, :name, "registration[name]")
     |> fill_field("John")
 
@@ -26,9 +28,11 @@ defmodule MangoWeb.Acceptance.RegistrationTest do
     find_within_element(form, :tag, "button")
     |> click
 
-    assert current_path == "/"
-    message = find_element(:class, "alert")
-              |> visible_text()
+    assert current_path() == "/"
+
+    message =
+      find_element(:class, "alert")
+      |> visible_text()
 
     assert message == "Registration successful"
   end

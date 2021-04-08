@@ -27,7 +27,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Start Hound for ChromeDriver (default port 9515 assumed)
-config :hound, driver: "chrome_driver"
+config :hound, driver: "chrome_driver", browser: "chrome_headless"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
