@@ -62,6 +62,6 @@ defmodule MangoWeb.Acceptance.SessionTest do
       find_element(:class, "alert-danger")
       |> visible_text()
 
-    assert message == "Invalid username/password combinations"
+    assert message == "Invalid username/password combination"
   end
 end

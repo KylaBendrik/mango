@@ -18,8 +18,7 @@ defmodule MangoWeb.Acceptance.RegistrationTest do
     find_within_element(form, :name, "registration[phone]")
     |> fill_field("1111")
 
-    find_within_element(form, :name, "
-    registration[residence_area]")
+    find_within_element(form, :name, "registration[residence_area]")
     |> fill_field("Area 1")
 
     find_within_element(form, :name, "registration[password]")
@@ -45,7 +44,6 @@ defmodule MangoWeb.Acceptance.RegistrationTest do
 
     assert current_path() == "/register"
     message = find_element(:id, "form-error") |> visible_text()
-    assert message == "Oops, something went wrong! Please check the
-    errors below."
+    assert message == "Oops, something went wrong! Please check the errors below."
   end
 end
