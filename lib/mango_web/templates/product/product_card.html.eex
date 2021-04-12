@@ -1,5 +1,10 @@
 <article class="product-card product">
+  <div class="caption">
+    <span class="product-pack_size"><%= @product.pack_size %></span>
+    <span class="product-name"><%= @product.name %></span>
+    <span class="product-price">$<span class="product-price-num"><%= @product.price %> </span>
+    <hr/>
+    <%= render "cart_form.html", product: @product, conn: @conn%>
+  </div>
   <img class="product-img" src="<%= @product.image %>" />
-  <span class="product-name"><%= @product.name %></span>
-  <span class="product-price">$<span class="product-price-num"><%= @product.price %> </span>
 </article>
