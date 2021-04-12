@@ -19,8 +19,10 @@ defmodule MangoWeb.Router do
 
     get "/", PageController, :index
     get "/categories/:name", CategoryController, :show
-    get "/login", SessionController, :new # used for displaying the login form
-    post "/login", SessionController, :create # used for processing the login form
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
     get "/logout", SessionController, :delete
   end
 
@@ -42,8 +44,6 @@ defmodule MangoWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: MangoWeb.Telemetry
-      get "/register", RegistrationController, :new
-      post "/register", RegistrationController, :create
     end
   end
 end

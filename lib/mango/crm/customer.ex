@@ -2,21 +2,22 @@ defmodule Mango.CRM.Customer do
   use Ecto.Schema
   import Ecto.Changeset
   alias Mango.CRM.Customer
+
   schema "customers" do
     field :email, :string
     field :name, :string
+    field :password, :string, virtual: true
     field :password_hash, :string
     field :phone, :string
     field :residence_area, :string
     timestamps()
   end
+
   @doc false
   def changeset(%Customer{} = customer, attrs) do
     customer
-    |> cast(attrs, [:name, :email, :phone, :residence_area,
-    :password_hash])
-    |> validate_required([:name, :email, :phone, :residence_area,
-    :password_hash])
+    |> cast(attrs, [:name, :email, :phone, :residence_area, :password])
+    |> validate_required([:name, :email, :phone, :residence_area, :password])
     |> unique_constraint(:email)
     |> put_hashed_password()
   end
