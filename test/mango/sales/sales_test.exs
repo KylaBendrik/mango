@@ -13,4 +13,18 @@ defmodule Mango.SalesTest do
     cart2 = Sales.get_cart(cart1.id)
     assert cart1.id == cart2.id
   end
+  
+  test "add_to_cart/2" do
+    product = %Product{
+      name: "Tomato",
+      pack_size: "1 kg",
+      price: 55,
+      sku: "A123",
+      is_seasonal: false, category: "vegetables" } |> Repo.insert!
+      
+      cart = Sales.create_cart
+      
+      {:ok, cart} = Sales.add_to_cart(cart, %{"prooduct_id" => product.id, "quantity" => "2"})
+    }
+  end
 end
