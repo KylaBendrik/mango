@@ -11,11 +11,16 @@ defmodule MangoWeb.CartController do
         
         conn
         |> put_flash(:info, message)
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index))
       {:error, _} ->
         conn
         |> put_flash(:info, "Error adding product to cart")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index))
     end
+  end
+  
+  def show(conn, _params) do
+    cart = conn.assigns.cart
+    render conn, "show.html", cart: cart
   end
 end

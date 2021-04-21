@@ -13,7 +13,7 @@ defmodule MangoWeb.Plugs.FetchCartTest do
   test "fetch cart from session on subsequent visit" do
     conn = get build_conn(), "/"            # first visit
     cart_id = get_session(conn, :cart_id)   # cart id from first visit
-    conn = get conn "/"                     #second visit
+    conn = get conn, "/"                     #second visit
     assert cart_id == conn.assigns.cart.id
   end
 end

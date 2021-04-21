@@ -45,7 +45,7 @@ defmodule Mango.CRMTest do
     assert customer1.id == customer2.id
   end
   
-  test "get_customer_by_credentials" do
+  test "get_customer_by_credentials/1" do
     valid_attrs = %{
       "name" => "John",
       "email" => "john@example.com",
@@ -55,7 +55,7 @@ defmodule Mango.CRMTest do
     }
 
     {:ok, customer1} = CRM.create_customer(valid_attrs)
-    customer2 = CRM.get_customer_by_credentials
+    customer2 = CRM.get_customer_by_credentials(valid_attrs)
     assert customer1.id == customer2.id
   end
 end

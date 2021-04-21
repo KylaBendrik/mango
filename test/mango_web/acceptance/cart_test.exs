@@ -6,10 +6,10 @@ defmodule MangoWeb.Acceptance.CartTest do
   
   setup do
     alias Mango.Repo
-    alias Mango.Catalg.Product
+    alias Mango.Catalog.Product
     
-    Repo.insert %Product{name: "Carrot", pack_size:"1 kg", price: 55, sku: "A123", is_seasonal: true }
-    Repo.insert %Product{name: "Apple", pack_size:"1 kg", price: 75, sku: "B232", is_seasonal: true }
+    Repo.insert %Product{name: "Carrot", pack_size: "1 kg", price: 55, sku: "A123", is_seasonal: true }
+    Repo.insert %Product{name: "Apple", pack_size: "1 kg", price: 75, sku: "B232", is_seasonal: true }
     :ok
   end
   
@@ -21,7 +21,7 @@ defmodule MangoWeb.Acceptance.CartTest do
     assert Enum.count(products) != 0
     products
     |> Enum.each(fn(product) ->
-      button = fine_within_element(product, :tag, "button")
+      button = find_within_element(product, :tag, "button")
       assert visible_text(button) == "Add to cart"
     end)
   end
@@ -31,7 +31,7 @@ defmodule MangoWeb.Acceptance.CartTest do
     
    [product | test] = find_all_elements(:css, ".product-card")
    
-   product_name = find_withing_element(product, :name, "cart[product_name")
+   product_name = find_within_element(product, :name, "cart[product_name")
    |> attribute_value("value")
    
    pack_size = find_within_element(product, :name, "cart[pack_size]")
