@@ -1,5 +1,6 @@
 defmodule Mango.Sales do
   alias Mango.Repo
+  alias Mango.Catalog.Product
   alias Mango.Sales.Order
   
   def get_cart(id) do
@@ -16,7 +17,7 @@ defmodule Mango.Sales do
     update_cart(cart, attrs)
   end
   
-  def add_to_cart(%Order{line_items: existing_line_items}) = cart, cart_params) do
+  def add_to_cart(%Order{line_items: existing_line_items} = cart, cart_params) do
     new_item = %{
       product_id: String.to_integer(cart_params["product_id"]),
       quantity: String.to_integer(cart_params["quantity"])
@@ -27,7 +28,7 @@ defmodule Mango.Sales do
     update_cart(cart, attrs)
   end
   
-  update_cart(cart, attrs) do
+  def update_cart(cart, attrs) do
     cart
     |> Order.changeset(attrs)
     |> Repo.update
