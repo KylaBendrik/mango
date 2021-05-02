@@ -34,8 +34,9 @@ defmodule MangoWeb.Acceptance.SessionTest do
     |> fill_field("secret")
 
     find_within_element(form, :tag, "button")
-    |> click
+    |> click()
 
+    # take_screenshot()
     ## THEN ##
     assert current_path() == "/"
 
