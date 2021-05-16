@@ -22,7 +22,22 @@ defmodule MangoWeb.CartController do
 
   def show(conn, _params) do
     cart = conn.assigns.cart
+    cart_changeset = Sales.change_cart(cart)
     products = Catalog.list_seasonal_products(3)
-    render conn, "show.html", cart: cart, products: products
+    render conn, "show.html", cart: cart, cart_changeset: cart_changeset, products: products
+  end
+
+  def update(conn, %{"order" => cart_params}) do
+    cart = conn.assigns.cart
+    case Sales.update_cart(cart, cart_params) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Cart updated successfully")
+        |> redirect(to: Routes.cart_path(conn, :show))
+      {:error,e} ->
+        conn
+        |> put_flash(:info, "Error updating cart#{inspect e}")
+        |> redirect(to: Routes.cart_path(conn, :show))
+    end
   end
 end

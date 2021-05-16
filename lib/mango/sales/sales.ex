@@ -30,6 +30,10 @@ defmodule Mango.Sales do
   def update_cart(cart, attrs) do
     cart
     |> Order.changeset(attrs)
-    |> Repo.update
+    |> Repo.update()
+  end
+
+  def change_cart(%Order{} = order) do
+    Order.changeset(order, %{})
   end
 end
