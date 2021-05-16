@@ -1,6 +1,7 @@
 defmodule MangoWeb.CartController do
   use MangoWeb, :controller
   alias Mango.Sales
+  alias Mango.Catalog
 
   def add(conn, %{"cart" => cart_params}) do
     cart = conn.assigns.cart
@@ -17,5 +18,11 @@ defmodule MangoWeb.CartController do
         |> put_flash(:info, "Error adding product to cart")
         |> redirect(to: Routes.page_path(conn, :index))
     end
+  end
+
+  def show(conn, _params) do
+    cart = conn.assigns.cart
+    products = Catalog.list_seasonal_products(3)
+    render conn, "show.html", cart: cart, products: products
   end
 end

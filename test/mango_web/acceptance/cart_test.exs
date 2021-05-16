@@ -43,7 +43,7 @@ defmodule MangoWeb.Acceptance.CartTest do
     find_within_element(product, :tag, "button")
     |> click
 
-    take_screenshot
+    # take_screenshot
     message = find_element(:css, ".alert")
     |> visible_text()
 
