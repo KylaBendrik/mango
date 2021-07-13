@@ -1,24 +1,32 @@
-// find the forms
-//  for each one: Add some submit logic
-//    While submitting: send the data ourselves
-//      When the response comes back: Display a helpful message
+import displayToast from './toast';
 
-const handleSubmission = function handlSubmission(submitEvent) {
-  submitEvent.preventDefault();
+function ajaxHandler(e) {
+  e.preventDefault();
 
-  const post_url = submitEvent.target.action;
+  const post_url = e.target.action;
+  const form_data = new FormData(e.target);
+  const request_options = {
+    method: 'POST',
+    body: form_data
+  };
 
-  fetch('/cart')
+  fetch(post_url, request_options)
+    .then(response => response.json())
+    .then(blurb => {
+      displayToast(blurb.message, 'success');
+
+      document
+        .querySelectorAll('.cart-count')
+        .forEach(elem => { elem.textContent = blurb.cart_count; })
+    });
 }
 
-const nodes = document
-  .querySelectorAll('.cart-form')
-  .forEach(form => {
-    form.addEventListener('submit', handleSubmission);
-  })
+const ajaxCart = {
+  init() {
+    document
+      .querySelectorAll('.cart-form')
+      .forEach(form => form.addEventListener('submit', ajaxHandler));
+  }
+};
 
-// To display pretty messages:
-// Adding a message container
-// Adding a message to that container
-// Keeping track of the recent messages
-// Timing out stale messages
+export default ajaxCart;

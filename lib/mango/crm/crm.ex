@@ -1,6 +1,12 @@
 defmodule Mango.CRM do
-  alias Mango.CRM.Customer
+  @moduledoc """
+  The CRM context.
+  """
+
+  import Ecto.Query, warn: false
   alias Mango.Repo
+  alias Mango.CRM.Customer
+  alias Mango.CRM.Ticket
 
   def build_customer(attrs \\ %{}) do
     %Customer{}
@@ -12,7 +18,7 @@ defmodule Mango.CRM do
     |> build_customer
     |> Repo.insert()
   end
-  
+
   def get_customer(id), do: Repo.get(Customer, id)
 
   def get_customer_by_email(email), do: Repo.get_by(Customer, email: email)
@@ -27,5 +33,65 @@ defmodule Mango.CRM do
       true ->
         :error
     end
+  end
+
+  @doc """
+  Returns the list of tickets.
+
+  ## Examples
+
+      iex> list_tickets()
+      [%Ticket{}, ...]
+
+  """
+  def list_tickets do
+    Repo.all(Ticket)
+  end
+
+  @doc """
+  Gets a single ticket.
+
+  Raises `Ecto.NoResultsError` if the Ticket does not exist.
+
+  ## Examples
+
+      iex> get_ticket!(123)
+      %Ticket{}
+
+      iex> get_ticket!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_ticket!(id), do: Repo.get!(Ticket, id)
+
+  @doc """
+  Creates a ticket.
+
+  ## Examples
+
+      iex> create_ticket(%{field: value})
+      {:ok, %Ticket{}}
+
+      iex> create_ticket(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_ticket(attrs \\ %{}) do
+    %Ticket{}
+    |> Ticket.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking ticket changes.
+
+  ## Examples
+
+      iex> change_ticket(ticket)
+      %Ecto.Changeset{data: %Ticket{}}
+
+  """
+  def change_ticket(%Ticket{} = ticket, attrs \\ %{}) do
+    Ticket.changeset(ticket, attrs)
   end
 end
