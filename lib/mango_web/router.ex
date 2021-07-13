@@ -1,14 +1,17 @@
 defmodule MangoWeb.Router do
   use MangoWeb, :router
 
+  pipeline :frontend do
+    plug MangoWeb.Plugs.LoadCustomer
+    plug MangoWeb.Plugs.FetchCart
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug MangoWeb.Plugs.LoadCustomer
-    plug MangoWeb.Plugs.FetchCart
   end
 
   pipeline :api do
@@ -16,18 +19,29 @@ defmodule MangoWeb.Router do
   end
 
   scope "/", MangoWeb do
-    pipe_through :browser
+    pipe_through [:browser, :frontend]
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
 
     get "/", PageController, :index
     get "/categories/:name", CategoryController, :show
-    get "/register", RegistrationController, :new
-    post "/register", RegistrationController, :create
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
-    get "/logout", SessionController, :delete
-    post "/cart", CartController, :add
+
     get "/cart", CartController, :show
+    post "/cart", CartController, :add
+    patch "/cart", CartController, :update
     put "/cart", CartController, :update
+  end
+
+  scope "/", MangoWeb do
+    pipe_through [:browser, :frontend, MangoWeb.Plugs.AuthenticateCustomer]
+    resources "/tickets", TicketController, except: [:edit, :update, :delete]
+
+    get "/logout", SessionController, :delete
+    get "/checkout", CheckoutController, :edit
+    put "/checkout/confirm", CheckoutController, :update
   end
 
   # Other scopes may use custom stacks.

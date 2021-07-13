@@ -36,7 +36,7 @@ defmodule Mango.SalesTest do
   end
 
   test "remove an item from cart" do
-    product = %Product{
+    tomatos = %Product{
       name: "Tomato",
       pack_size: "1 kg",
       price: 55,
@@ -44,15 +44,31 @@ defmodule Mango.SalesTest do
       is_seasonal: false, category: "vegetables"
     }
     |> Repo.insert!
+
+    apples = %Product{
+      name: "Apples",
+      pack_size: "1 kg",
+      price: 55,
+      sku: "A124",
+      is_seasonal: false, category: "fruit"
+    }
+    |> Repo.insert!
+
     cart = Sales.create_cart
-    {:ok, cart} = Sales.add_to_cart(cart, %{"product_id" => product.id, "quantity" => "2"})
-    %{line_items: [li]} = cart
+    {:ok, cart} = Sales.add_to_cart(cart, %{"product_id" => "#{tomatos.id}", "quantity" => "2"})
+    {:ok, cart} = Sales.add_to_cart(cart, %{"product_id" => "#{apples.id}", "quantity" => "2"})
+    %{line_items: [li1, li2]} = cart
     result = Sales.update_cart(cart, %{
       "line_items" => %{
         "0" => %{
           "delete" => "true",
-          "id" => li.id,
-          "product_id" => product.id,
+          "id" => li1.id,
+          "product_id" => tomatos.id,
+          "quantity" => "2"
+        },
+        "1" => %{
+          "id" => li2.id,
+          "product_id" => apples.id,
           "quantity" => "2"
         }
       }
