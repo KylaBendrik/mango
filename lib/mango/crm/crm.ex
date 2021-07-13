@@ -64,7 +64,7 @@ defmodule Mango.CRM do
       ** (Ecto.NoResultsError)
 
   """
-  def get_customer_ticket!(customer, id), do
+  def get_customer_ticket!(customer, id) do
     customer
     |> Ecto.assoc(:tickets)
     |> Repo.get!(id)
@@ -84,7 +84,7 @@ defmodule Mango.CRM do
   """
   def build_customer_ticket(%Customer{} = customer, attrs \\ %{}) do
     Ecto.build_assoc(customer, :tickets, %{status: "New"})
-    |> Ticket.changeset(attrss)
+    |> Ticket.changeset(attrs)
   end
 
   @doc """

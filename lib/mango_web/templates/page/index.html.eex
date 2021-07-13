@@ -1,4 +1,4 @@
-<h1 class="page-title">Seasonal Products</h1>
+<h1 class="page-title"><%= gettext "Seasonal Products" %></</h1>
 <div class="catalog">
   <%= for product <- @seasonal_products do %>
     <%= render MangoWeb.ProductView, "product_card.html", conn: @conn, product: product %>
