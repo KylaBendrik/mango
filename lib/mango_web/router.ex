@@ -39,7 +39,7 @@ defmodule MangoWeb.Router do
   scope "/", MangoWeb do
     pipe_through [:browser, :frontend, MangoWeb.Plugs.AuthenticateCustomer]
     resources "/tickets", TicketController, except: [:edit, :update, :delete]
-
+    resources "/orders", OrderController
     get "/logout", SessionController, :delete
     get "/checkout", CheckoutController, :edit
     put "/checkout/confirm", CheckoutController, :update

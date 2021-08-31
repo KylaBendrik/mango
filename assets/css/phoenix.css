@@ -49,6 +49,10 @@ h2{font-size: 2.8rem;
   color: #a7ba4a;
 }
 
+.cartsvg {
+  width: 50px;
+}
+
 /* Catalog */
 .catalog {
   display: flex;

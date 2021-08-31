@@ -2,6 +2,7 @@ defmodule Mango.CRM.Customer do
   use Ecto.Schema
   import Ecto.Changeset
   alias Mango.CRM.{Customer, Ticket}
+  alias Mango.Sales.Order
 
   schema "customers" do
     field :email, :string
@@ -11,6 +12,7 @@ defmodule Mango.CRM.Customer do
     field :phone, :string
     field :residence_area, :string
     has_many :tickets, Ticket
+    has_many :orders, Order
     timestamps()
   end
 
