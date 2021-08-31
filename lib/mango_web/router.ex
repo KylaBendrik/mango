@@ -42,6 +42,7 @@ defmodule MangoWeb.Router do
     get "/logout", SessionController, :delete
     get "/checkout", CheckoutController, :edit
     put "/checkout/confirm", CheckoutController, :update
+    get "/orders", OrdersController, :index
   end
 
   # Other scopes may use custom stacks.

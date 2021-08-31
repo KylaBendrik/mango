@@ -25,6 +25,7 @@ h2{font-size: 2.8rem;
 .nav {
   flex-grow: 2;
   align-self: flex-end;
+  display: inline-block;
 }
 .nav-item {
   text-decoration: none;

@@ -8,6 +8,7 @@ defmodule Mango.CRM do
   alias Mango.CRM.Customer
   alias Mango.CRM.Ticket
 
+
   def build_customer(attrs \\ %{}) do
     %Customer{}
     |> Customer.changeset(attrs)
@@ -44,8 +45,14 @@ defmodule Mango.CRM do
       [%Ticket{}, ...]
 
   """
-  def list_tickets do
-    Repo.all(Ticket)
+  # def list_tickets do
+  #   Repo.all(Ticket)
+  # end
+
+  def list_customer_tickets(customer) do
+    customer
+    |> Ecto.assoc(:tickets)
+    |> Repo.all
   end
 
   @doc """
@@ -62,7 +69,13 @@ defmodule Mango.CRM do
       ** (Ecto.NoResultsError)
 
   """
-  def get_ticket!(id), do: Repo.get!(Ticket, id)
+  # def get_ticket!(id), do: Repo.get!(Ticket, id)
+
+  def get_customer_ticket!(customer, id) do
+    customer
+    |> Ecto.assoc(:tickets)
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a ticket.
@@ -76,9 +89,8 @@ defmodule Mango.CRM do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_ticket(attrs \\ %{}) do
-    %Ticket{}
-    |> Ticket.changeset(attrs)
+  def create_customer_ticket(%Customer{} = customer, attrs \\ %{}) do
+    build_customer_ticket(customer, attrs)
     |> Repo.insert()
   end
 
@@ -91,7 +103,12 @@ defmodule Mango.CRM do
       %Ecto.Changeset{data: %Ticket{}}
 
   """
-  def change_ticket(%Ticket{} = ticket, attrs \\ %{}) do
-    Ticket.changeset(ticket, attrs)
+  # def change_ticket(%Ticket{} = ticket, attrs \\ %{}) do
+  #   Ticket.changeset(ticket, attrs)
+  # end
+
+  def build_customer_ticket(%Customer{} = customer, attrs \\ %{}) do
+    Ecto.build_assoc(customer, :tickets, %{status: "New"})
+    |> Ticket.changeset(attrs)
   end
 end
