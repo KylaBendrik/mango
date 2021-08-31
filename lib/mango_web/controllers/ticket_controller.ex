@@ -2,7 +2,7 @@ defmodule MangoWeb.TicketController do
   use MangoWeb, :controller
 
   alias Mango.CRM
-  alias Mango.CRM.Ticket
+
 
   def index(conn, _params) do
     customer = conn.assigns.current_customer
@@ -12,7 +12,7 @@ defmodule MangoWeb.TicketController do
 
   def new(conn, _params) do
     customer = conn.assigns.current_customer
-    changeset = CRM.change_ticket(customer)
+    changeset = CRM.build_customer_ticket(customer)
     render(conn, "new.html", changeset: changeset)
   end
 
